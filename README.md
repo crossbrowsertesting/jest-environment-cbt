@@ -1,74 +1,77 @@
-<h2><strong>Getting Started with Jest and CrossBrowserTesting</strong></h2>
+###Getting Started with Jest and CrossBrowserTesting
 Jest is a delightful JavaScript Testing Framework with a focus on simplicity.
 It works with projects using: <a href="https://babeljs.io/">Babel</a>, <a href="https://www.typescriptlang.org/">TypeScript</a>, <a href="https://nodejs.org/en/">Node</a>, <a href="https://reactjs.org/">React</a>, <a href="https://angular.io/">Angular</a>, <a href="https://vuejs.org/">Vue</a> and more!
-<h3>Setting up Jest</h3>
-1.  Install yarn
-<pre><code>npm install yarn</code></pre>
-2. Install jest
-<pre><code>yarn add --dev jest</code></pre>
-3. Edit the file package.json to include the following
-<pre><code>"scripts": {
-   "test": "jest"
-}
-</code></pre>
-<h3>Create your first test</h3>
-1. Create file cbt.test.js
+####Setting up the Jest CrossBrowserTesting Environment
+Install the environment:
 
-Now, just copy the following script into a text editor of your choice, and be sure to add your CBT username and authkey to the script. To get yours, sign up for a <a href="https://crossbrowsertesting.com/freetrial" rel="nofollow"><b>free trial</b></a> or purchase a <a href="https://crossbrowsertesting.com/pricing" rel="nofollow"><b>plan</b></a>.
-<pre><code>
-var webdriver = require("selenium-webdriver");
-var cbtHub = "http://hub.crossbrowsertesting.com:80/wd/hub";
+```yarn add --dev jest-environment-cbt```
 
-var username ='YOUR_USERNAME'; //replace with your email address
-var authkey = 'YOUR_AUTHKEY'; //replace with your authkey
+or 
 
-//set capabilities
-var caps = {
-name : 'Login Example',
-build : '1.0',
-version : '70',
-platform : 'Windows 10',
-screen_resolution : '1366x768',
-record_video : 'true',
-record_network : 'false',
-browserName : 'Chrome',
-username : username,
-password : authkey
-};
+```npm install --save-dev jest-environment-cbt```
 
-const { By, until } = webdriver
+Edit the file package.json or Jest configuration file to start using CBT capabilities
+```javascript
+    
+    "jest": {
+      "testEnvironment": "jest-environment-cbt",
+      "testEnvironmentOptions": {
+        "startLocalConnection": false,
+        "capabilities": {
+          "platform": "Windows 10",
+          "browserName": "Firefox",
+          "recordVideo": "true"
+        }
+      }
+    },
 
-describe('webdriver', () =&gt; {
-let driver;
+```
 
-beforeAll(async () =&gt; {
-driver = new webdriver.Builder()
-.usingServer(cbtHub)
-.withCapabilities(caps)
-.build();
+####CBT Authorization
 
-await driver.get('http://crossbrowsertesting.github.io/login-form.html');
-},10000);
+You can pass your CBT credentials one of two ways: 
 
-afterAll(async () =&gt; {
-await driver.quit();
-}, 10000);
+via environment variables:
+```shell script
+export USERNAME="YOURUSERNAME"
+export AUTHKEY="YOURAUTHKEY"
+```
 
-// test case
-test('Successful Login', async () =&gt; {
-await driver.findElement(webdriver.By.id("username")).sendKeys("tester@crossbrowsertesting.com");
-await driver.findElement(webdriver.By.xpath("//*[@type=\"password\"]")).sendKeys("test123");
+or via your Jest Configuration
+```angular2
+    "testEnvironmentOptions": {
+        "username": "YOURUSERNAME",
+        "authkey": "YOURAUTHKEY",
+        "capabilities": {
+        ...
+        
+```
 
-await driver.findElement(webdriver.By.css("button[type=submit]")).click();
-output = await driver.wait(webdriver.until.elementLocated(webdriver.By.id("logged-in")), 10000);
-outputVal = await output.getAttribute('innerHTML');
+####Local Connection
 
-expect(outputVal).toEqual('You are now logged in!');
+You can use this environment to start a local connection via CrossBrowserTesting so that resources within your network become accessible in our browsers. Just set `startLocalConnection` to `true` in your testEnvironmentOptions, and the this module will take care of the rest.
+
+####Create your first test
+
+If you're using this environment, the CBT browser will automatically be in scope.
+
+```javascript
+const { By } = require('selenium-webdriver');
+
+describe('Todo Example', () => {
+    test('Successful Todo', async () => {
+        await driver.get('http://crossbrowsertesting.github.io/todo-app.html');
+        await driver.findElement(By.name("todo-4")).click();
+        await driver.findElement(By.name("todo-5")).click();
+        await driver.findElement(By.id("todotext")).sendKeys("Run your first Selenium Test");
+        await driver.findElement(By.id("addbutton")).click();
+        await driver.findElement(By.linkText("archive")).click();
+        const activeElements = await driver.findElements(By.className('done-false'));
+        const activeLength = activeElements.length;
+        expect(activeLength).toEqual(4);
+    }, 15000);
 });
-});
-</code></pre>
-<h3>Running your test</h3>
-<pre><code>yarn test</code></pre>
-As you can probably make out from our example test, we check if a successful login was achieved.
+```
 
+####Support
 If you have any questions or concerns, feel <a href="mailto:support@crossbrowsertesting.com">free to get in touch</a>.
