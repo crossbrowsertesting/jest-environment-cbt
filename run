@@ -1,0 +1,4 @@
+export USERNAME="YOURUSERNAME"
+export AUTHKEY="YOURAUTHKEY"
+
+jest --test-environment ./cbt.env.js --max-concurrency 2
