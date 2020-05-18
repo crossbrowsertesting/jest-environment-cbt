@@ -12,17 +12,7 @@
   "main": "index.js",
   "devDependencies": {},
   "scripts": {
-    "test": "./run"
-  },
-  "jest": {
-    "cbt": {
-      "username": "chase+13@crossbrowsertesting.com",
-      "authkey": "ud3d8451b9940269",
-      "startLocalConnection": true,
-      "capabilities": {
-        "recordVideo": "true"
-      }
-    }
+    "test": ""
   },
   "repository": {
     "type": "git",
