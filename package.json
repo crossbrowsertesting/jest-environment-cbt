@@ -28,10 +28,22 @@
     "type": "git",
     "url": "https://github.com/crossbrowsertesting/jest-environment-cbt.git"
   },
-  "author": "Chase Cook",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/crossbrowsertesting/selenium-Jest/issues"
+  "author": {
+    "name": "SmartBear",
+    "email": "info@smartbear.com",
+    "url": "https://smartbear.com"
   },
-  "homepage": "https://github.com/crossbrowsertesting/selenium-Jest#readme"
+  "keywords": [
+    "jest",
+    "jest-environment",
+    "jest-environment-cbt",
+    "CrossBrowserTesting.com",
+    "CrossBrowserTesting",
+    "CBT"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/crossbrowsertesting/jest-environment-cbt/issues"
+  },
+  "homepage": "https://github.com/crossbrowsertesting/jest-environment-cbt#readme"
 }
