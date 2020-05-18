@@ -1,22 +1,34 @@
 {
   "dependencies": {
+    "cbt_tunnels": "^1.2.2",
     "jest": "^26.0.1",
     "jest-environment-node": "^26.0.1",
+    "lodash": "^4.17.15",
     "selenium-webdriver": "^4.0.0-alpha.7"
   },
-  "name": "selenium-jest",
-  "description": "<h2><strong>Getting Started with Jest and CrossBrowserTesting</strong></h2> Jest is a delightful JavaScript Testing Framework with a focus on simplicity. It works with projects using: <a href=\"https://babeljs.io/\">Babel</a>, <a href=\"https://www.typescriptlang.org/\">TypeScript</a>, <a href=\"https://nodejs.org/en/\">Node</a>, <a href=\"https://reactjs.org/\">React</a>, <a href=\"https://angular.io/\">Angular</a>, <a href=\"https://vuejs.org/\">Vue</a> and more! <h3>Setting up Jest</h3> 1.  Install yarn <pre><code>npm install yarn</code></pre> 2. Install jest <pre><code>yarn add --dev jest</code></pre> 3. Edit the file package.json to include the following <pre><code>\"scripts\": {    \"test\": \"jest\" } </code></pre> <h3>Create your first test</h3> 1. Create file cbt.test.js",
+  "name": "jest-environment-cbt",
+  "description": "Environment for Running Jest Tests on CrossBrowserTesting",
   "version": "1.0.0",
-  "main": "cbt.test.js",
+  "main": "index.js",
   "devDependencies": {},
   "scripts": {
     "test": "./run"
   },
+  "jest": {
+    "cbt": {
+      "username": "chase+13@crossbrowsertesting.com",
+      "authkey": "ud3d8451b9940269",
+      "startLocalConnection": true,
+      "capabilities": {
+        "recordVideo": "true"
+      }
+    }
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/crossbrowsertesting/selenium-Jest.git"
+    "url": "https://github.com/crossbrowsertesting/jest-environment-cbt.git"
   },
-  "author": "",
+  "author": "Chase Cook",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/crossbrowsertesting/selenium-Jest/issues"
